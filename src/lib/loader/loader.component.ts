@@ -1,20 +1,20 @@
 import {Component, Input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {LoaderService} from './loader.service';
+import {NgFullLoaderService} from './loader.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ILoaderState} from './loader-state.interface';
 
 @Component({
-  selector: 'ng-loader',
+  selector: 'app-ng-full-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.css']
 })
-export class LoaderComponent implements OnInit, OnDestroy {
+export class NgFullLoaderComponent implements OnInit, OnDestroy {
   @Input() public customTemplate: TemplateRef<any>;
   public show = false;
   private subscription: Subscription;
 
 
-  constructor(private loaderService: LoaderService) { }
+  constructor(private loaderService: NgFullLoaderService) { }
 
   public ngOnInit() {
     this.subscription = this.loaderService.loaderState
