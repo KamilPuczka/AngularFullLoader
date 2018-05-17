@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {AppService} from './app.service';
+import {Subscription} from 'rxjs/index';
+import {NgFullLoaderService} from '../../projects/ng-full-loader/src/lib/ng-full-loader.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,11 @@ import {AppService} from './app.service';
 export class AppComponent {
   title = 'app';
 
-  constructor(private appService: AppService) {
-
-
+  constructor(private loaderService: NgFullLoaderService) {
   }
 
-  testLoader() {
-    this.appService.getLoader().subscribe((data) => console.log(data));
+  public showLoader() {
+    this.loaderService.showLoader(0);
+    setTimeout(() => this.loaderService.hideLoader(), 1000);
   }
 }

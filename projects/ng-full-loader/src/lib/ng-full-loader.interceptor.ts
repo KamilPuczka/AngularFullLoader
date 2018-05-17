@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
-import {NgFullLoaderService} from './loader.service';
+import {NgFullLoaderService} from './ng-full-loader.service';
+import {Observable} from 'rxjs/index';
+import {tap} from 'rxjs/internal/operators';
 
 @Injectable()
-export class LoaderInterceptor implements HttpInterceptor {
+export class NgFullLoaderInterceptor implements HttpInterceptor {
 
   constructor(private loaderService: NgFullLoaderService) {
   }
@@ -16,7 +16,8 @@ export class LoaderInterceptor implements HttpInterceptor {
     }
     return next
       .handle(req)
-      .do(event => {
+      .pipe(
+        tap(event => {
           if (event instanceof HttpResponse) {
             this.loaderService.hideLoader();
           } else {
@@ -26,6 +27,6 @@ export class LoaderInterceptor implements HttpInterceptor {
         err => {
           this.loaderService.hideLoader();
         }
-      );
+      ));
   }
 }

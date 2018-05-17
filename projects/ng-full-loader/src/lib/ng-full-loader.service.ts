@@ -1,15 +1,12 @@
 import {Inject, Injectable, Optional} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {ILoaderState} from './loader-state.interface';
+import {ILoaderState} from './ng-full-loader-state.interface';
 import {ILoaderConfig, LOADER_GLOBAL_CONFIG} from './LoaderConfig';
-import {Subscription} from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {Subject, Subscription} from 'rxjs/index';
 
 @Injectable()
 export class NgFullLoaderService {
   public loaderSubject = new Subject<ILoaderState>();
-  public loaderState = this.loaderSubject.asObservable();
 
   public get IsHttpEnabled(): boolean {
     return this.config.enableForHttp;

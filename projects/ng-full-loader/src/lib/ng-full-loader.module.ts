@@ -1,10 +1,10 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import { NgFullLoaderComponent} from './loader.component';
-import {NgFullLoaderService} from './loader.service';
 import {ILoaderConfig, LOADER_GLOBAL_CONFIG} from './LoaderConfig';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoaderInterceptor} from './loader.interceptor';
+import {NgFullLoaderComponent} from './ng-full-loader.component';
+import {NgFullLoaderService} from './ng-full-loader.service';
+import {NgFullLoaderInterceptor} from './ng-full-loader.interceptor';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import {LoaderInterceptor} from './loader.interceptor';
     NgFullLoaderService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptor,
+      useClass: NgFullLoaderInterceptor,
       multi: true,
     }
   ]
