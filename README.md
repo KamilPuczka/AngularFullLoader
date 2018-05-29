@@ -8,7 +8,7 @@ AngularFullLoader is simply, complex, complete application loader fired by inter
 Run `npm install ng-full-loader --save` 
 
 ### Demo
-See [`forRoot`](https://stackblitz.com/github/KamilPuczka/AngularFullLoader)
+Check Loader [`Demo`](https://stackblitz.com/github/KamilPuczka/AngularFullLoader)
 
 ## Usage
 #### 1. Import the `NgFullLoaderModule`:
@@ -60,5 +60,5 @@ NgFullLoaderModule.forRoot({
       enableForRouting: true,
       defaultDelay: 100,
       enableForHttp: false
-      }
+      })
 ```
