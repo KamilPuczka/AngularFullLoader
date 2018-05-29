@@ -30,3 +30,11 @@ import {TranslateModule} from '@ngx-translate/core';
 })
 export class AppModule { }
 ```
+
+After that you need to use Loader Component in your application e.g. in AppComponent
+
+```html
+<ng-full-loader></ng-full-loader>
+<h1>Hello world</h1>
+```
+Now Angular Loader will appear in default configuration: in each HttpRequest, disabled on routing, with 500 ms delay.
