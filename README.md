@@ -7,6 +7,9 @@ AngularFullLoader is simply, complex, complete application loader fired by inter
 
 Run `npm install ng-full-loader --save` 
 
+### Demo
+See [`forRoot`](https://stackblitz.com/github/KamilPuczka/AngularFullLoader)
+
 ## Usage
 #### 1. Import the `NgFullLoaderModule`:
 Finally, you can use ng-full-loader in your Angular project. You have to import `NgFullLoaderModule.forRoot()` in the root NgModule of your application.
@@ -38,3 +41,24 @@ After that you need to use Loader Component in your application e.g. in AppCompo
 <h1>Hello world</h1>
 ```
 Now Angular Loader will appear in default configuration: in each HttpRequest, disabled on routing, with 500 ms delay.
+
+#### 2. Configuration:
+
+Default configuration can be changed in `NgFullLoaderModule.forRoot()` using interface:  
+
+```ts
+export interface ILoaderConfig {
+  enableForRouting?: boolean;
+  enableForHttp?: boolean;
+  defaultDelay?: number;
+}
+```
+e.g.
+
+```ts
+NgFullLoaderModule.forRoot({
+      enableForRouting: true,
+      defaultDelay: 100,
+      enableForHttp: false
+      }
+```

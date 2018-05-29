@@ -5,7 +5,7 @@ import {NgFullLoaderModule} from '../../projects/ng-full-loader/src/lib/ng-full-
 import { RouterLoaderComponent } from './router-loader/router-loader.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-
+  
 
 @NgModule({
   declarations: [
