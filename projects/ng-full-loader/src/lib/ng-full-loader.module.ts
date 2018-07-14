@@ -1,34 +1,31 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ModuleWithProviders} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoaderComponent} from './loader.component';
-import {LoaderService} from './loader.service';
 import {ILoaderConfig, LOADER_GLOBAL_CONFIG} from './LoaderConfig';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoaderInterceptor} from './loader.interceptor';
-
-class ModuleWithProviders {
-}
+import {NgFullLoaderComponent} from './ng-full-loader.component';
+import {NgFullLoaderService} from './ng-full-loader.service';
+import {NgFullLoaderInterceptor} from './ng-full-loader.interceptor';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    LoaderComponent
+    NgFullLoaderComponent
   ],
   exports: [
-    LoaderComponent
+    NgFullLoaderComponent
   ],
   providers: [
-    LoaderService,
+    NgFullLoaderService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptor,
+      useClass: NgFullLoaderInterceptor,
       multi: true,
     }
   ]
 })
-export class LoaderModule {
+export class NgFullLoaderModule {
   public static forRoot(options?: ILoaderConfig): ModuleWithProviders {
     let config: ILoaderConfig = {
       enableForHttp: true,
@@ -37,7 +34,7 @@ export class LoaderModule {
     };
     config = options ? Object.assign(config, options) : config;
     return {
-      ngModule: LoaderModule,
+      ngModule: NgFullLoaderModule,
       providers: [
         {
           provide: LOADER_GLOBAL_CONFIG,

@@ -1,14 +1,12 @@
 import {Inject, Injectable, Optional} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {ILoaderState} from './loader-state.interface';
+import {ILoaderState} from './ng-full-loader-state.interface';
 import {ILoaderConfig, LOADER_GLOBAL_CONFIG} from './LoaderConfig';
-import {Subscription} from 'rxjs/Subscription';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent} from '@angular/router';
+import {Subject, Subscription} from 'rxjs/index';
 
 @Injectable()
-export class LoaderService {
+export class NgFullLoaderService {
   public loaderSubject = new Subject<ILoaderState>();
-  public loaderState = this.loaderSubject.asObservable();
 
   public get IsHttpEnabled(): boolean {
     return this.config.enableForHttp;
@@ -25,7 +23,7 @@ export class LoaderService {
     defaultDelay: 500
   };
 
-  constructor(@Optional() @Inject(LOADER_GLOBAL_CONFIG) globalConfig: ILoaderConfig, private router: Router) {
+  constructor(@Optional() @Inject(LOADER_GLOBAL_CONFIG) globalConfig: ILoaderConfig, @Optional() private router: Router) {
     this.config = globalConfig ? Object.assign(this.config, globalConfig) : this.config;
 
     if (this.config.enableForRouting) {
@@ -54,11 +52,15 @@ export class LoaderService {
   }
 
   public enableRoutingLoader(): void {
-    if (!this._routingSubscription || this._routingSubscription.closed) {
-      this._routingSubscription = this.router.events.subscribe((value: RouterEvent) => {
-          return this.checkRouterEvent(value);
-        }
-      );
+    if (this.router) {
+      if (!this._routingSubscription || this._routingSubscription.closed) {
+        this._routingSubscription = this.router.events.subscribe((value: RouterEvent) => {
+            return this.checkRouterEvent(value);
+          }
+        );
+      }
+    } else {
+      console.error('Router provider is not available');
     }
   }
 
