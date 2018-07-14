@@ -1,2 +1,17 @@
 <ng-full-loader></ng-full-loader>
-<button (click)="showLoader()">Show loader</button>
+<div class="container">
+<div class="flex-container">
+  <div class="blue" (click)="showLoader()">
+    <h1>Show loader for 5 seconds</h1>
+  </div>
+  <div class="red" (click)="testRouterLoader()">
+    <h1>Test router</h1>
+  </div>
+  <div class="green" (click)="testHttp()">
+    <h1>Test Http</h1>
+  </div>
+</div>
+</div>
+<router-outlet></router-outlet>
+
+

@@ -1,0 +1,17 @@
+.router-test-cover{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  opacity: 0.6;
+}
+p{
+  color: white;
+  font-size: 30px;
+}

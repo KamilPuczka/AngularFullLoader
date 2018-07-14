@@ -1,27 +1,64 @@
 # AngularFullLoader
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1.
+AngularFullLoader is simply, complex, complete application loader fired by interceptor, router events or manualy. Whole behaviour can be configured in module or application.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm install ng-full-loader --save` 
 
-## Code scaffolding
+### Demo
+Check Loader [Demo](https://stackblitz.com/github/KamilPuczka/AngularFullLoader)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
+#### 1. Import the `NgFullLoaderModule`:
+Finally, you can use ng-full-loader in your Angular project. You have to import `NgFullLoaderModule.forRoot()` in the root NgModule of your application.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The [`forRoot`](https://angular.io/docs/ts/latest/guide/ngmodule.html#!#core-for-root) static method is a convention that provides and configures services at the same time.
+Make sure you only call this method in the root module of your application, most of the time called `AppModule`.
+This method allows you to configure the `NgFullLoaderModule';
 
-## Running unit tests
+```ts
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+    imports: [
+        BrowserModule,
+        NgFullLoaderModule.forRoot()
+    ],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Running end-to-end tests
+After that you need to use Loader Component in your application e.g. in AppComponent
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```html
+<ng-full-loader></ng-full-loader>
+<h1>Hello world</h1>
+```
+Now Angular Loader will appear in default configuration: in each HttpRequest, disabled on routing, with 500 ms delay.
 
-## Further help
+#### 2. Configuration:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Default configuration can be changed in `NgFullLoaderModule.forRoot()` using interface:  
+
+```ts
+export interface ILoaderConfig {
+  enableForRouting?: boolean;
+  enableForHttp?: boolean;
+  defaultDelay?: number;
+}
+```
+e.g.
+
+```ts
+NgFullLoaderModule.forRoot({
+      enableForRouting: true,
+      defaultDelay: 100,
+      enableForHttp: false
+      })
+```
